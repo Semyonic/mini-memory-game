@@ -1,0 +1,15 @@
+  .container {
+    display: inline-block;
+    max-width: 950px;
+    margin: '20px auto';
+  }
+
+  img {
+    width: 100px;
+    height: 100px;
+    display: block;
+  }
+
+  #grad {
+    background-image: repeating-radial-gradient(gray 1%, darkgray 10%, yellow 5%);
+  }
