@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from 'react-router-dom';
 import Flippy, { BackSide, FrontSide } from "react-flippy";
 import "../game/Game.css";
 
@@ -14,7 +15,7 @@ const flipperStyle = {
   paddingTop: 10
 };
 
-export default class CardView extends React.Component {
+class CardView extends React.Component {
   constructor(props) {
     super(props);
     this.onClick = this.onClick.bind(this);
@@ -49,3 +50,5 @@ export default class CardView extends React.Component {
     );
   }
 }
+
+export default withRouter(CardView);
