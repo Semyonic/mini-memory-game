@@ -1,5 +1,5 @@
 import shuffle from "shuffle-array";
-import { CARD_COUNT, generateCardSet, isUnique } from "../../funks";
+import { CARD_COUNT, generateCardSet, isUnique } from "../../Utils";
 import * as Actions from "../actions/game.actions";
 
 const initialState = {
@@ -66,10 +66,7 @@ export default function game(state = initialState, action) {
       };
 
     case Actions.CHECK_MATCHED_PAIR:
-      if (
-        state.numClicksWithinTurn === 2 &&
-        isUnique(state.firstCard, state.secondCard, state.cards)
-      ) {
+      if ( state.numClicksWithinTurn === 2 && isUnique(state.firstCard, state.secondCard, state.cards)) {
         let pairsFound = state.pairsFound + 1;
         let finished = false;
         if (pairsFound === CARD_COUNT) {
