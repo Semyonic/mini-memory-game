@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Redirect, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { checkMatchedPair, flipUpCard, initGame } from "../../state/actions/game.actions";
 import CardView from "../card/Card";
 import "./Game.css";
@@ -11,12 +11,12 @@ class Game extends React.Component {
     this.goHome = this.goHome.bind(this);
   }
   componentWillMount() {
-    setInterval(this.props.onCheckForMatchedPair, 1000);
+    setInterval(this.props.isMatched, 1000);
   }
 
   getCardViews() {
     let cardViews = [];
-    let onClick = this.props.onCardClicked;
+    let onClick = this.props.clicked;
     this.props.cards.map(({ id, image, imageUp, matched }) => {
       return (cardViews = [
         ...cardViews,
@@ -51,7 +51,7 @@ class Game extends React.Component {
     );
 
     if (this.props.finished) {
-      return <Redirect to="/results" resultData={this.props.turnNo} />;
+      this.props.history.push('/results',{ result: this.props.turnNo });
     }
 
     return (
@@ -74,15 +74,14 @@ const mapStateToProps = ({ cards, turnNo, finished, pairsFound }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onCardClicked: id => {
+    clicked: id => {
       dispatch(flipUpCard(id));
     },
-    onCheckForMatchedPair: () => {
+    isMatched: () => {
       dispatch(checkMatchedPair());
     },
-    onPlayAgain: () => {
-      this.props.history.push("/");
-      dispatch(initGame());
+    reset: () => {
+      dispatch(initGame())
     }
   };
 };
